@@ -15,7 +15,7 @@ public class Node<K, V> {
         this.val = val;
         this.parent = parent;
         this.height = 1;
-        this.color = RED;
+        this.color = RED;       //对于红黑树来说，新插入的节点默认为红节点
     }
 
     public void clear() {

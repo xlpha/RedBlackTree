@@ -2,8 +2,19 @@ package com.example.bst;
 
 public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 
+    /**
+     * 根节点指针
+     */
     protected Node<K, V> root;
+
+    /**
+     * 节点个数
+     */
     protected int size;
+
+    /**
+     * 在执行查找、插入、删除操作时，该指针会指向目标节点的父节点
+     */
     protected Node<K, V> hot;
 
     @Override
@@ -68,8 +79,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
             return s;
         }
         Node<K, V> temp = new Node<>(key, value, hot);
-        Comparable<? super K> k = key;
-        if (k.compareTo(hot.key) < 0) {
+        if (key.compareTo(hot.key) < 0) {
             hot.left = temp;
         } else {
             hot.right = temp;
@@ -82,9 +92,8 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
      * 删除指定位置的节点，并返回实际删除节点的继承者位置
      */
     protected Node<K, V> removeAt(Node<K, V> x) {
-        //todo
-        Node<K, V> w = x;   //实际被摘除的节点，初值同x
-        Node<K, V> succ = null; //实际被删除节点的接替者
+        Node<K, V> w = x;       //实际被摘除的节点，初值同x
+        Node<K, V> succ;        //实际被删除节点的接替者
         if (!x.hasLeftChild()) {
             succ = x.right;
         } else if (!x.hasRightChild()) {
